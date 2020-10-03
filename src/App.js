@@ -1,13 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Todo from "../src/components/Todo";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 function App() {
   return (
     <div className="App">
-      <h1>Ampliy Todo</h1>
+      <Todo />
     </div>
   );
 }
 
-export default App;
+export default withAuthenticator(App, { includeGreetings: true });

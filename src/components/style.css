@@ -1,0 +1,114 @@
+/* Todo-list concept in vanilla js
+--------------
+Say Hi!
+https://twitter.com/Kouroshelkaie
+https://www.instagram.com/kouroshelkaie */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: "quicksand"; */
+}
+body {
+  background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+}
+.container {
+  width: 25%;
+  background-color: #ffffff;
+  margin: 4em auto 0;
+  padding: 3em 2em 1em 3em;
+  border-radius: 4px 4px 0 0;
+}
+h2 {
+  color: #333333;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+#inputData {
+  margin-bottom: 1em;
+  border: none;
+  width: 70%;
+  height: 2.3em;
+  padding: 0 1em;
+  border-bottom: 1px solid #8c8c8c;
+  background-color: #ffffff;
+  color: #333333;
+}
+#inputData::placeholder {
+  color: #333333;
+}
+#inputData,
+button:focus {
+  outline: none;
+}
+button {
+  border: none;
+  padding: 0.7em 2em;
+  background-color: #08898f;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 1px 2px 0 #333333;
+  border-radius: 1px;
+}
+
+button:hover {
+  background-color: #15676c;
+}
+p {
+  color: #333333;
+  margin: 0.7em 0;
+  cursor: pointer;
+  padding: 0.8em 1.5em;
+  background-color: #f7f7f7;
+  white-space: normal;
+  font-size: 0.85em;
+  width: 90%;
+  border-radius: 2px;
+}
+#done {
+  width: 25%;
+  background-color: #ffffff;
+  margin: 0 auto 30em;
+  padding: 3em 2em 5em 3em;
+  position: relative;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+
+span {
+  white-space: normal;
+  transition: all 0.1s linear;
+}
+#cls {
+  float: right;
+}
+
+span:first-child:hover {
+  text-decoration: line-through;
+}
+#clearButton {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 100%;
+  padding: 0.8em 0;
+}
+.todoItem {
+  /* background: rebeccapurple; */
+  display: flex;
+}
+.todotext {
+  flex: 9;
+}
+.todoDelete {
+  flex: 2;
+  margin-top: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.todoEdit {
+  cursor: pointer;
+}
