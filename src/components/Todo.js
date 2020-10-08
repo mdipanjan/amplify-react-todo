@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { createTodo } from "../graphql/mutations";
+import { createTodo, updateTodo } from "../graphql/mutations";
 import { listTodos } from "../graphql/queries";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
@@ -9,24 +9,40 @@ class Todo extends Component {
   state = {
     todo: "",
     toDoList: [],
+    editId: "",
+    editObj: {},
   };
   handleSubmit = async () => {
-    let { todo, toDoList } = this.state;
+    let { todo, toDoList, editId, editObj } = this.state;
     let data = {
       note: todo,
     };
-    console.log();
-    const result = await API.graphql(
-      graphqlOperation(createTodo, { input: data })
-    );
-    let newTodo = result.data.createTodo;
-    // console.log(toDoList);
-    // return;
-    let newList = [...this.state.toDoList, newTodo];
-    this.setState({
-      toDoList: newList,
-      todo: "",
-    });
+
+    if (editId === "") {
+      const result = await API.graphql(
+        graphqlOperation(createTodo, { input: data })
+      );
+      let newTodo = result.data.createTodo;
+
+      let newList = [...this.state.toDoList, newTodo];
+      this.setState({
+        toDoList: newList,
+        todo: "",
+      });
+    } else {
+      let input = {
+        id: editId,
+        note: todo,
+      };
+      const edited = await API.graphql(graphqlOperation(updateTodo, { input }));
+      let newData = edited.data.updateTodo;
+      let todoArr = [...toDoList];
+      let indx = todoArr.indexOf(editObj);
+      todoArr[indx] = newData;
+      this.setState({
+        toDoList: todoArr,
+      });
+    }
   };
   handleChange = (e) => {
     this.setState({
@@ -34,6 +50,12 @@ class Todo extends Component {
     });
   };
   handleEdit = (item) => {
+    this.setState({
+      todo: item.note,
+      editId: item.id,
+      editObj: item,
+    });
+
     console.log(item);
   };
 
