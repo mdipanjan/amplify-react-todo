@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { createTodo, updateTodo } from "../graphql/mutations";
+import { createTodo, updateTodo, deleteTodo } from "../graphql/mutations";
 import { listTodos } from "../graphql/queries";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
@@ -58,6 +58,20 @@ class Todo extends Component {
 
     console.log(item);
   };
+  handleDelete = async (item) => {
+    let { todo, toDoList } = this.state;
+    let todoArr = [...toDoList];
+
+    let input = {
+      id: item.id,
+    };
+    const result = await API.graphql(graphqlOperation(deleteTodo, { input }));
+    let neArr = todoArr.filter((elem) => elem.id !== result.data.deleteTodo.id);
+    console.log(neArr);
+    this.setState({
+      toDoList: neArr,
+    });
+  };
 
   async componentDidMount() {
     const response = await API.graphql(graphqlOperation(listTodos));
@@ -108,8 +122,8 @@ class Todo extends Component {
                       <AiOutlineEdit />
                     </div>
                     <div
-                      onClick={(item) => {
-                        alert();
+                      onClick={() => {
+                        this.handleDelete(item);
                       }}
                       className="todoDelete"
                     >
