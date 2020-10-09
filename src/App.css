@@ -4,3 +4,14 @@
 body {
   font-family: "Roboto", sans-serif;
 } */
+.signup-wrap {
+  width: 90vw;
+  height: 80px;
+  /* flex-direction: row;
+  justify-content: flex-end; */
+}
+.signup-btn {
+  width: 50px;
+  float: right;
+  margin-top: 20px;
+}

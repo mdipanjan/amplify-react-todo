@@ -3,7 +3,7 @@ import "./App.css";
 import Todo from "../src/components/Todo";
 import AuthTheme from "../src/config/AuthTheme";
 import { Auth } from "aws-amplify";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 
 function App() {
   const [isLoggedIn, chnageLogin] = useState(false);
@@ -28,6 +28,12 @@ function App() {
 
   return (
     <div className="App">
+      <div className="signup-wrap">
+        <div className="signup-btn">
+          <AmplifySignOut />
+        </div>
+      </div>
+
       <Todo />
     </div>
   );
